@@ -52,18 +52,11 @@ public class PatternFetcher {
 
         List<String> patternIds = env.getArgument("pattern_id");
 
-        if (patternIds != null) {
-            return feed.feed.patterns.values().stream()
-                    .filter(p -> p.associatedRoutes.contains(route.entity.route_id))
-                    .filter(p -> patternIds.contains(p.pattern_id))
-                    .map(p -> new WrappedGTFSEntity<>(feed.id, p))
-                    .collect(Collectors.toList());
-        } else {
-            return feed.feed.patterns.values().stream()
-                    .filter(p -> p.associatedRoutes.contains(route.entity.route_id))
-                    .map(p -> new WrappedGTFSEntity<>(feed.id, p))
-                    .collect(Collectors.toList());
-        }
+        return feed.feed.patterns.values().stream()
+                .filter(p -> p.associatedRoutes.contains(route.entity.route_id) &&
+                        (patternIds != null ? patternIds.contains(p.pattern_id) : true))
+                .map(p -> new WrappedGTFSEntity<>(feed.id, p))
+                .collect(Collectors.toList());
     }
 
     public static WrappedGTFSEntity<Pattern> fromTrip(DataFetchingEnvironment env) {
