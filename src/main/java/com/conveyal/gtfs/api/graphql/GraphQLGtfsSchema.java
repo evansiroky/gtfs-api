@@ -181,7 +181,7 @@ public class GraphQLGtfsSchema {
                     .argument(multiStringArg("feed_id"))
                     .argument(multiStringArg("pattern_id"))
                     .dataFetcher(PatternFetcher::apex)
-                    .type(new GraphQLList(feedType))
+                    .type(new GraphQLList(patternType))
                     .build()
             )
             .build();

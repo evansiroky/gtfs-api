@@ -33,11 +33,11 @@ public class PatternFetcher {
                 patternId.stream()
                         .filter(feed.feed.patterns::containsKey)
                         .map(feed.feed.patterns::get)
-                        .map(d -> new WrappedGTFSEntity(feed.id, d))
+                        .map(p -> new WrappedGTFSEntity(feed.id, p))
                         .forEach(patterns::add);
             } else {
                 feed.feed.patterns.values().stream()
-                        .map(d -> new WrappedGTFSEntity(feed.id, d))
+                        .map(p -> new WrappedGTFSEntity(feed.id, p))
                         .forEach(patterns::add);
             }
         }
